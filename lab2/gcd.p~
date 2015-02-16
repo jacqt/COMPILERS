@@ -1,0 +1,20 @@
+(* lab2/gcd.p *)
+
+var x, y: integer;
+
+begin
+  y := 5 * 37;
+  print x;
+  while x <> y do
+    if x > y then
+      x := x - y
+    else
+      y := y - x
+    end
+  end;
+  print x; newline
+end.
+
+(*<<
+ 37
+>>*)

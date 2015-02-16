@@ -1,7 +1,9 @@
 # lab1/Makefile
 
 ## Add your own test cases to this list
-TEST = gcd repeat loop case
+TEST = ickynestedif
+
+PROG = ickynestedif
 
 all: ppc
 
@@ -19,6 +21,16 @@ lexer.ml: lexer.mll
 tree.cmo: MLFLAGS += -w u
 
 KEIKO = ../keiko
+
+prog : force
+	$(MAKE) $(PROG:%=prog-%)
+
+prog-% : force
+	@echo "*** Program $*.p"
+	./ppc $*.p >a.k
+	$(KEIKO)/pplink -custom -nostdlib $(KEIKO)/lib.k a.k -o a.x >/dev/null
+	$(KEIKO)/ppx ./a.x 
+
 
 test : force
 	$(MAKE) $(TEST:%=test-%)

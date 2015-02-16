@@ -1,0 +1,15 @@
+begin
+  if (2 < 1) or (3 < 4) then 
+    if (not (6 > 5) and (3 <> 4)) then
+      print 3; newline;
+    else
+      print 4; newline;
+    end;
+  else
+    print 5; newline;
+  end; 
+end.
+
+(*<<
+ 4
+>>*)

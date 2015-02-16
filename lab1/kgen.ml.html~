@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~\Documents\Bitbucket\compilers\lab1\kgen.ml.html</title>
+<meta name="Generator" content="Vim/7.4">
+<meta name="plugin-version" content="vim7.4_v1">
+<meta name="syntax" content="ocaml">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,expand_tabs,prevent_copy=">
+<meta name="colorscheme" content="github">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #f8f8ff; }
+body { font-family: monospace; color: #000000; background-color: white; }
+* { font-size: 1em; }
+.Conceal { color: #b3b3b3; }
+.Number { color: #1c9898; }
+.Statement { color: #000000; font-weight: bold; }
+.PreProc { color: #a0a0a0; font-weight: bold; }
+.Constant { color: #177f80; }
+.Comment { color: #999988; }
+.String { color: #d81745; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Statement">open</span> <span class="PreProc">Tree</span>
+<span class="Statement">open</span> <span class="PreProc">Keiko</span>
+
+<span class="Statement">let</span> optflag <span class="Statement">=</span> ref <span class="Constant">false</span>
+
+<span class="Comment">(* |gen_expr| -- generate code for an expression *)</span>
+<span class="Statement">let</span> <span class="Statement">rec</span> gen_expr <span class="Statement">=</span>
+  <span class="Statement">function</span>
+    <span class="Conceal">¦</span> <span class="Constant">Variable</span> x <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Constant">SEQ</span> <span class="Statement">[</span><span class="Constant">LINE</span> x.x_line<span class="Statement">;</span> <span class="Constant">LDGW</span> x.x_lab<span class="Statement">]</span>
+    <span class="Statement">|</span> <span class="Constant">Number</span> x <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Constant">CONST</span> x
+    <span class="Statement">|</span> <span class="Constant">Monop</span> <span class="Statement">(</span>w, e1<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Constant">SEQ</span> <span class="Statement">[</span>gen_expr e1<span class="Statement">;</span> <span class="Constant">MONOP</span> w<span class="Statement">]</span>
+    <span class="Statement">|</span> <span class="Constant">Binop</span> <span class="Statement">(</span>w, e1, e2<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Constant">SEQ</span> <span class="Statement">[</span>gen_expr e1<span class="Statement">;</span> gen_expr e2<span class="Statement">;</span> <span class="Constant">BINOP</span> w<span class="Statement">]</span>
+
+<span class="Comment">(* |gen_cond| -- generates the opposite binop function for comparisons *)</span>
+<span class="Statement">let</span> opposite_binop <span class="Statement">=</span> <span class="Statement">function</span>
+    <span class="Constant">Eq</span> <span class="Statement">-&gt;</span> <span class="Constant">Neq</span>
+   <span class="Statement">|</span><span class="Constant">Neq</span> <span class="Statement">-&gt;</span> <span class="Constant">Eq</span>
+   <span class="Statement">|</span><span class="Constant">Lt</span> <span class="Statement">-&gt;</span> <span class="Constant">Geq</span>
+   <span class="Statement">|</span><span class="Constant">Geq</span> <span class="Statement">-&gt;</span> <span class="Constant">Lt</span>
+   <span class="Statement">|</span><span class="Constant">Gt</span> <span class="Statement">-&gt;</span> <span class="Constant">Leq</span>
+   <span class="Statement">|</span><span class="Constant">Leq</span> <span class="Statement">-&gt;</span> <span class="Constant">Gt</span>
+   <span class="Statement">|</span> <span class="Statement">_</span> <span class="Statement">-&gt;</span> failwith <span class="String">&quot;can't use me with that!&quot;</span>
+
+<span class="Comment">(* |gen_cond| -- generate code for short-circuit condition *)</span>
+<span class="Comment">(* We pass in the truth label, false label, as well as a boolean telling us whether the code block*)</span>
+<span class="Comment">(* directly following is the 'truth' body or the 'false' body*)</span>
+<span class="Statement">let</span> <span class="Statement">rec</span> gen_cond tlab flab e tlab_follows<span class="Statement">=</span>
+  <span class="Comment">(* Jump to |tlab| if |e| is true and |flab| if it is false *)</span>
+  <span class="Comment">(* Also returns information regarding withether tlab or flab was used in the construction of the condition*)</span>
+  <span class="Statement">match</span> e <span class="Statement">with</span>
+    <span class="Conceal">¦</span> <span class="Constant">Number</span> x <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">if</span> x <span class="Statement">&lt;&gt;</span> <span class="Number">0</span> <span class="Statement">then</span> <span class="Statement">(</span><span class="Constant">JUMP</span> tlab, <span class="Constant">true</span>, <span class="Constant">false</span><span class="Statement">)</span> <span class="Statement">else</span> <span class="Statement">(</span><span class="Constant">JUMP</span> flab, <span class="Constant">false</span>, <span class="Constant">true</span><span class="Statement">)</span>
+    <span class="Statement">|</span> <span class="Constant">Binop</span> <span class="Statement">((</span><span class="Constant">Eq</span><span class="Statement">|</span><span class="Constant">Neq</span><span class="Statement">|</span><span class="Constant">Lt</span><span class="Statement">|</span><span class="Constant">Gt</span><span class="Statement">|</span><span class="Constant">Leq</span><span class="Statement">|</span><span class="Constant">Geq</span><span class="Statement">)</span> <span class="Statement">as</span> w, e1, e2<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Conceal">¦</span> <span class="Statement">if</span> <span class="Statement">(</span>tlab_follows<span class="Statement">)</span> <span class="Statement">then</span>
+    <span class="Conceal">¦</span>   <span class="Statement">(</span><span class="Constant">SEQ</span> <span class="Statement">[</span>gen_expr e1<span class="Statement">;</span> gen_expr e2<span class="Statement">;</span>
+    <span class="Conceal">¦</span>   <span class="Conceal">¦</span>   <span class="Conceal">¦</span> <span class="Constant">JUMPC</span> <span class="Statement">(</span> opposite_binop w, flab<span class="Statement">)</span><span class="Statement">;</span><span class="Statement">]</span>, <span class="Constant">false</span>, <span class="Constant">true</span><span class="Statement">)</span> <span class="Statement">else</span>
+    <span class="Conceal">¦</span>   <span class="Statement">(</span><span class="Constant">SEQ</span> <span class="Statement">[</span>gen_expr e1<span class="Statement">;</span> gen_expr e2<span class="Statement">;</span>
+    <span class="Conceal">¦</span>   <span class="Conceal">¦</span>   <span class="Conceal">¦</span> <span class="Constant">JUMPC</span> <span class="Statement">(</span> w, tlab<span class="Statement">)</span><span class="Statement">;</span><span class="Statement">]</span>, <span class="Constant">true</span>, <span class="Constant">false</span><span class="Statement">)</span>
+    <span class="Statement">|</span> <span class="Constant">Monop</span> <span class="Statement">(</span><span class="Constant">Not</span>, e1<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> <span class="Statement">(</span>cond, flab_used, tlab_used<span class="Statement">)</span> <span class="Statement">=</span> gen_cond flab tlab e1 <span class="Statement">(</span><span class="Statement">not</span> tlab_follows<span class="Statement">)</span> <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="Statement">(</span>cond, tlab_used, flab_used<span class="Statement">)</span>
+    <span class="Statement">|</span> <span class="Constant">Binop</span> <span class="Statement">(</span><span class="Constant">And</span>, e1, e2<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> lab1 <span class="Statement">=</span> label <span class="Constant">()</span> <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> <span class="Statement">(</span>cond1, lab1_used, flab_used_1<span class="Statement">)</span> <span class="Statement">=</span> gen_cond lab1 flab e1 <span class="Constant">true</span> <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> <span class="Statement">(</span>cond2, tlab_used, flab_used_2<span class="Statement">)</span> <span class="Statement">=</span> gen_cond tlab flab e2 tlab_follows <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="Statement">(</span><span class="Constant">SEQ</span> <span class="Statement">[</span>cond1 <span class="Statement">;</span> <span class="Statement">if</span> <span class="Statement">(</span>lab1_used<span class="Statement">)</span> <span class="Statement">then</span> <span class="Constant">LABEL</span> lab1 <span class="Statement">else</span> <span class="Constant">SEQ</span> <span class="Constant">[]</span><span class="Statement">;</span> cond2 <span class="Statement">]</span>, tlab_used, flab_used_1 <span class="Statement">||</span> flab_used_2<span class="Statement">)</span>
+    <span class="Statement">|</span> <span class="Constant">Binop</span> <span class="Statement">(</span><span class="Constant">Or</span>, e1, e2<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> lab1 <span class="Statement">=</span> label <span class="Constant">()</span> <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> <span class="Statement">(</span>cond1, tlab_used_1, lab1_used<span class="Statement">)</span> <span class="Statement">=</span> gen_cond tlab lab1 e1 <span class="Constant">false</span> <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> <span class="Statement">(</span>cond2, tlab_used_2, flab_used<span class="Statement">)</span> <span class="Statement">=</span> gen_cond tlab flab e2 tlab_follows <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="Statement">(</span><span class="Constant">SEQ</span> <span class="Statement">[</span>cond1 <span class="Statement">;</span> <span class="Statement">if</span> <span class="Statement">(</span>lab1_used<span class="Statement">)</span> <span class="Statement">then</span> <span class="Constant">LABEL</span> lab1 <span class="Statement">else</span> <span class="Constant">SEQ</span> <span class="Constant">[]</span><span class="Statement">;</span> cond2 <span class="Statement">]</span>, tlab_used_1 <span class="Statement">||</span> tlab_used_2, flab_used<span class="Statement">)</span>
+    <span class="Statement">|</span> <span class="Statement">_</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">if</span> <span class="Statement">(</span>tlab_follows<span class="Statement">)</span> <span class="Statement">then</span>
+    <span class="Conceal">¦</span>   <span class="Conceal">¦</span>   <span class="Statement">(</span><span class="Constant">SEQ</span> <span class="Statement">[</span>gen_expr e<span class="Statement">;</span> <span class="Constant">JUMPB</span> <span class="Statement">(</span><span class="Constant">false</span>, flab<span class="Statement">)</span><span class="Statement">;</span> <span class="Statement">]</span>, <span class="Constant">false</span>, <span class="Constant">true</span><span class="Statement">)</span> <span class="Statement">else</span>
+    <span class="Conceal">¦</span>   <span class="Conceal">¦</span>   <span class="Statement">(</span><span class="Constant">SEQ</span> <span class="Statement">[</span>gen_expr e<span class="Statement">;</span> <span class="Constant">JUMPB</span> <span class="Statement">(</span><span class="Constant">true</span>, tlab<span class="Statement">)</span><span class="Statement">;</span> <span class="Statement">]</span>, <span class="Constant">true</span>, <span class="Constant">false</span><span class="Statement">)</span>
+
+<span class="Comment">(* |gen_nested_body| -- generate code for a statement in a if/else statement*)</span>
+<span class="Statement">let</span> <span class="Statement">rec</span> gen_nested_body exit_label a <span class="Statement">=</span>
+  <span class="Statement">match</span> a <span class="Statement">with</span>
+    <span class="Conceal">¦</span> <span class="Constant">Skip</span> <span class="Statement">-&gt;</span> <span class="Constant">NOP</span>
+    <span class="Statement">|</span> <span class="Constant">Seq</span> stmts <span class="Statement">-&gt;</span> <span class="Constant">SEQ</span> <span class="Statement">(</span><span class="PreProc">List</span>.map <span class="Statement">(</span>gen_nested_body exit_label<span class="Statement">)</span> stmts<span class="Statement">)</span>
+    <span class="Statement">|</span> <span class="Constant">Assign</span> <span class="Statement">(</span>v, e<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Constant">SEQ</span> <span class="Statement">[</span><span class="Constant">LINE</span> v.x_line<span class="Statement">;</span> gen_expr e<span class="Statement">;</span> <span class="Constant">STGW</span> v.x_lab<span class="Statement">]</span>
+    <span class="Statement">|</span> <span class="Constant">Print</span> e <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Constant">SEQ</span> <span class="Statement">[</span>gen_expr e<span class="Statement">;</span> <span class="Constant">CONST</span> <span class="Number">0</span><span class="Statement">;</span> <span class="Constant">GLOBAL</span> <span class="String">&quot;Lib.Print&quot;</span><span class="Statement">;</span> <span class="Constant">PCALL</span> <span class="Number">1</span><span class="Statement">]</span>
+    <span class="Statement">|</span> <span class="Constant">Newline</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Constant">SEQ</span> <span class="Statement">[</span><span class="Constant">CONST</span> <span class="Number">0</span><span class="Statement">;</span> <span class="Constant">GLOBAL</span> <span class="String">&quot;Lib.Newline&quot;</span><span class="Statement">;</span> <span class="Constant">PCALL</span> <span class="Number">0</span><span class="Statement">]</span>
+    <span class="Statement">|</span> <span class="Constant">IfStmt</span> <span class="Statement">(</span>test, thenpt, elsept<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> lab1 <span class="Statement">=</span> label <span class="Constant">()</span> <span class="Statement">and</span> lab2 <span class="Statement">=</span> label <span class="Constant">()</span> <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> <span class="Statement">(</span>cond, lab1_used, lab2_used<span class="Statement">)</span> <span class="Statement">=</span> gen_cond lab1 lab2 test <span class="Constant">true</span> <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="Constant">SEQ</span> <span class="Statement">[</span>cond<span class="Statement">;</span>
+    <span class="Conceal">¦</span>   <span class="Conceal">¦</span> <span class="Statement">if</span> <span class="Statement">(</span>lab1_used<span class="Statement">)</span> <span class="Statement">then</span> <span class="Constant">LABEL</span> lab1 <span class="Statement">else</span> <span class="Constant">SEQ</span> <span class="Constant">[]</span><span class="Statement">;</span> gen_nested_body exit_label thenpt<span class="Statement">;</span> <span class="Constant">JUMP</span> exit_label<span class="Statement">;</span>
+    <span class="Conceal">¦</span>   <span class="Conceal">¦</span> <span class="Statement">if</span> <span class="Statement">(</span>lab2_used<span class="Statement">)</span> <span class="Statement">then</span>  <span class="Constant">LABEL</span> lab2 <span class="Statement">else</span> <span class="Constant">SEQ</span> <span class="Constant">[]</span><span class="Statement">;</span> gen_nested_body exit_label elsept<span class="Statement">;</span><span class="Statement">]</span>
+    <span class="Statement">|</span> <span class="Statement">_</span> <span class="Statement">-&gt;</span> failwith <span class="String">&quot;Too lazy to deal with while statements&quot;</span>
+
+<span class="Comment">(* |gen_stmt| -- generate code for a statement *)</span>
+<span class="Statement">let</span> <span class="Statement">rec</span> gen_stmt <span class="Statement">=</span>
+  <span class="Statement">function</span>
+    <span class="Conceal">¦</span> <span class="Constant">Skip</span> <span class="Statement">-&gt;</span> <span class="Constant">NOP</span>
+    <span class="Statement">|</span> <span class="Constant">Seq</span> stmts <span class="Statement">-&gt;</span> <span class="Constant">SEQ</span> <span class="Statement">(</span><span class="PreProc">List</span>.map gen_stmt stmts<span class="Statement">)</span>
+    <span class="Statement">|</span> <span class="Constant">Assign</span> <span class="Statement">(</span>v, e<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Constant">SEQ</span> <span class="Statement">[</span><span class="Constant">LINE</span> v.x_line<span class="Statement">;</span> gen_expr e<span class="Statement">;</span> <span class="Constant">STGW</span> v.x_lab<span class="Statement">]</span>
+    <span class="Statement">|</span> <span class="Constant">Print</span> e <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Constant">SEQ</span> <span class="Statement">[</span>gen_expr e<span class="Statement">;</span> <span class="Constant">CONST</span> <span class="Number">0</span><span class="Statement">;</span> <span class="Constant">GLOBAL</span> <span class="String">&quot;Lib.Print&quot;</span><span class="Statement">;</span> <span class="Constant">PCALL</span> <span class="Number">1</span><span class="Statement">]</span>
+    <span class="Statement">|</span> <span class="Constant">Newline</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Constant">SEQ</span> <span class="Statement">[</span><span class="Constant">CONST</span> <span class="Number">0</span><span class="Statement">;</span> <span class="Constant">GLOBAL</span> <span class="String">&quot;Lib.Newline&quot;</span><span class="Statement">;</span> <span class="Constant">PCALL</span> <span class="Number">0</span><span class="Statement">]</span>
+    <span class="Statement">|</span> <span class="Constant">IfStmt</span> <span class="Statement">(</span>test, thenpt, elsept<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> lab1 <span class="Statement">=</span> label <span class="Constant">()</span> <span class="Statement">and</span> lab2 <span class="Statement">=</span> label <span class="Constant">()</span> <span class="Statement">and</span> lab3 <span class="Statement">=</span> label <span class="Constant">()</span> <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> <span class="Statement">(</span>cond, lab1_used, lab2_used<span class="Statement">)</span> <span class="Statement">=</span> gen_cond lab1 lab2 test <span class="Constant">true</span> <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="Constant">SEQ</span> <span class="Statement">[</span>cond<span class="Statement">;</span>
+    <span class="Conceal">¦</span>   <span class="Conceal">¦</span> <span class="Statement">if</span> <span class="Statement">(</span>lab1_used<span class="Statement">)</span> <span class="Statement">then</span> <span class="Constant">LABEL</span> lab1 <span class="Statement">else</span> <span class="Constant">SEQ</span> <span class="Constant">[]</span><span class="Statement">;</span> gen_nested_body lab3 thenpt<span class="Statement">;</span> <span class="Constant">JUMP</span> lab3<span class="Statement">;</span>
+    <span class="Conceal">¦</span>   <span class="Conceal">¦</span> <span class="Statement">if</span> <span class="Statement">(</span>lab2_used<span class="Statement">)</span> <span class="Statement">then</span>  <span class="Constant">LABEL</span> lab2 <span class="Statement">else</span> <span class="Constant">SEQ</span> <span class="Constant">[]</span><span class="Statement">;</span> gen_nested_body lab3 elsept<span class="Statement">;</span> <span class="Constant">LABEL</span> lab3<span class="Statement">]</span>
+    <span class="Statement">|</span> <span class="Statement">_</span> <span class="Statement">-&gt;</span> failwith <span class="String">&quot;Too lazy to deal with while statements&quot;</span>
+
+<span class="Comment">(* |translate| -- generate code for the whole program *)</span>
+<span class="Statement">let</span> translate <span class="Statement">(</span><span class="Constant">Program</span> ss<span class="Statement">)</span> <span class="Statement">=</span>
+  <span class="Statement">let</span> code <span class="Statement">=</span> gen_stmt ss <span class="Statement">in</span>
+  <span class="PreProc">Keiko</span>.output <span class="Statement">(if</span> <span class="Statement">!</span>optflag <span class="Statement">then</span> <span class="PreProc">Peepopt</span>.optimise code <span class="Statement">else</span> code<span class="Statement">)</span>
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

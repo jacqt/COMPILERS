@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~\Documents\Bitbucket\compilers\lab2\check_initialized.ml.html</title>
+<meta name="Generator" content="Vim/7.4">
+<meta name="plugin-version" content="vim7.4_v1">
+<meta name="syntax" content="ocaml">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,expand_tabs,prevent_copy=">
+<meta name="colorscheme" content="github">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: white; }
+body { font-family: monospace; color: #000000; background-color: white; }
+* { font-size: 1em; }
+.Conceal { color: #b3b3b3; }
+.Statement { color: #000000; font-weight: bold; }
+.PreProc { color: #a0a0a0; font-weight: bold; }
+.Constant { color: #177f80; }
+.String { color: #d81745; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Statement">module</span><span class="PreProc"> InitSet</span> <span class="Statement">=</span> <span class="PreProc">Set.Make</span>( <span class="PreProc">String</span> )
+
+<span class="Statement">let</span> get_name e <span class="Statement">=</span>
+  <span class="Statement">match</span> e.e_guts <span class="Statement">with</span>
+    <span class="Conceal">¦</span> <span class="Constant">Variable</span> x <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   x.x_name
+    <span class="Statement">|</span> <span class="Statement">_</span> <span class="Statement">-&gt;</span> failwith <span class="String">&quot;not a variable&quot;</span>
+
+<span class="Statement">let</span> <span class="Statement">rec</span> check_expr_init init_set e <span class="Statement">=</span>
+    <span class="Statement">match</span> e.e_guts <span class="Statement">with</span>
+    <span class="Conceal">¦</span> <span class="Constant">Variable</span> x <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">if</span> <span class="Statement">not</span> <span class="Statement">(</span><span class="PreProc">InitSet</span>.mem x.x_name init_set<span class="Statement">)</span> <span class="Statement">then</span> failwith <span class="String">&quot;ERROR VARIABLE NOT INITIALIZED&quot;</span>
+    <span class="Statement">|</span> <span class="Constant">Number</span> n <span class="Statement">-&gt;</span> <span class="Constant">()</span>
+    <span class="Statement">|</span> <span class="Constant">Sub</span> <span class="Statement">(</span>e1, e2<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> <span class="Statement">_</span> <span class="Statement">=</span> check_expr_init init_set e1
+    <span class="Conceal">¦</span>   <span class="Statement">and</span> <span class="Statement">_</span> <span class="Statement">=</span> check_expr_init init_set e2 <span class="Statement">in</span> <span class="Constant">()</span>
+    <span class="Statement">|</span> <span class="Constant">Monop</span> <span class="Statement">(</span>w, e1<span class="Statement">)</span> <span class="Statement">-&gt;</span> check_expr_init init_set e1
+    <span class="Statement">|</span> <span class="Constant">Binop</span> <span class="Statement">(</span>w, e1, e2<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> <span class="Statement">_</span> <span class="Statement">=</span> check_expr_init init_set e1
+    <span class="Conceal">¦</span>   <span class="Statement">and</span> <span class="Statement">_</span> <span class="Statement">=</span> check_expr_init init_set e2 <span class="Statement">in</span> <span class="Constant">()</span>
+
+<span class="Statement">let</span> <span class="Statement">rec</span> check_init_stmt init_set <span class="Statement">=</span>
+  <span class="Statement">function</span>
+    <span class="Conceal">¦</span> <span class="Constant">Seq</span> ss <span class="Statement">-&gt;</span> <span class="PreProc">List</span>.fold_left <span class="Statement">(</span>check_init_stmt <span class="Statement">)</span> init_set  ss
+    <span class="Statement">|</span> <span class="Constant">Assign</span><span class="Statement">(</span>lhs, rhs<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> <span class="Statement">_</span> <span class="Statement">=</span> check_expr init_set rhs <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="PreProc">InitSet</span>.union init_set <span class="Statement">(</span><span class="PreProc">InitSet</span>.singleton <span class="Statement">(</span>get_name lhs<span class="Statement">))</span>
+    <span class="Statement">|</span> <span class="Constant">Print</span> e <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> <span class="Statement">_</span>  <span class="Statement">=</span> check_expr_init init_set e <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   init_set
+    <span class="Statement">|</span> <span class="Constant">IfStmt</span> <span class="Statement">(</span>cond, thenpt, elsept<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> then_initset <span class="Statement">=</span> check_init_stmt init_set thenpt <span class="Statement">and</span>
+    <span class="Conceal">¦</span>   else_initset <span class="Statement">=</span> check_init_stmt init_set elsept <span class="Statement">and</span>
+    <span class="Conceal">¦</span>   <span class="Statement">_</span> <span class="Statement">=</span> check_expr_init init_set cond <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="PreProc">InitSet</span>.inter then_initset else_initset
+    <span class="Statement">|</span> <span class="Constant">WhileStmt</span> <span class="Statement">(</span>cond, body<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+    <span class="Conceal">¦</span>   <span class="Statement">let</span> body_initset <span class="Statement">=</span> check_init_stmt init_set body <span class="Statement">and</span>
+    <span class="Conceal">¦</span>   <span class="Statement">_</span> <span class="Statement">=</span> check_expr_init init_set cond <span class="Statement">in</span>
+    <span class="Conceal">¦</span>   <span class="PreProc">InitSet</span>.union init_set body_initset
+    <span class="Statement">|</span> <span class="Statement">_</span> <span class="Statement">-&gt;</span> init_set
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

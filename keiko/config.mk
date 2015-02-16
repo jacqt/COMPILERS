@@ -25,6 +25,9 @@ ifeq ($(HOST),Linux-armv6l)
   CC = gcc
 endif
 
+OK = 1
+CC = gcc -m32
+
 ifndef OK
 $(error Can't configure for host type $(HOST))
 endif
