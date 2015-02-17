@@ -1,0 +1,418 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ADDOP	.\parser.ml	/^  | ADDOP of (Keiko.op)$/;"	C	type:token
+ADDOP	.\parser.mli	/^  | ADDOP of (Keiko.op)$/;"	C	type:token
+ASSIGN	.\parser.ml	/^  | ASSIGN$/;"	C	type:token
+ASSIGN	.\parser.mli	/^  | ASSIGN$/;"	C	type:token
+And	.\keiko.ml	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+And	.\keiko.mli	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Assign	.\tree.ml	/^  | Assign of name * expr$/;"	C	type:stmt
+Assign	.\tree.mli	/^  | Assign of name * expr$/;"	C	type:stmt
+BADTOK	.\parser.ml	/^  | BADTOK$/;"	C	type:token
+BADTOK	.\parser.mli	/^  | BADTOK$/;"	C	type:token
+BEGIN	.\parser.ml	/^  | BEGIN$/;"	C	type:token
+BEGIN	.\parser.mli	/^  | BEGIN$/;"	C	type:token
+BINOP	.\keiko.ml	/^  | BINOP of op                 (* Perform binary operation (op) *)$/;"	C	type:code
+BINOP	.\keiko.mli	/^  | BINOP of op                 (* Perform binary operation (op) *)$/;"	C	type:code
+BOUND	.\keiko.ml	/^  | BOUND of int                (* Bounds check *)$/;"	C	type:code
+BOUND	.\keiko.mli	/^  | BOUND of int                (* Bounds check *)$/;"	C	type:code
+Binop	.\tree.ml	/^  | Binop of Keiko.op * expr * expr$/;"	C	type:expr
+Binop	.\tree.mli	/^  | Binop of Keiko.op * expr * expr$/;"	C	type:expr
+Block	.\tree.ml	/^type block = Block of ident list * proc list * stmt$/;"	C	type:block
+Block	.\tree.mli	/^type block = Block of ident list * proc list * stmt$/;"	C	type:block
+CASEARM	.\keiko.ml	/^  | CASEARM of int * codelab    (* Case value and label *)$/;"	C	type:code
+CASEARM	.\keiko.mli	/^  | CASEARM of int * codelab    (* Case value and label *)$/;"	C	type:code
+CASEJUMP	.\keiko.ml	/^  | CASEJUMP of int             (* Case jump (num cases) *)$/;"	C	type:code
+CASEJUMP	.\keiko.mli	/^  | CASEJUMP of int             (* Case jump (num cases) *)$/;"	C	type:code
+COMMA	.\parser.ml	/^  | COMMA$/;"	C	type:token
+COMMA	.\parser.mli	/^  | COMMA$/;"	C	type:token
+CONST	.\keiko.ml	/^    CONST of int                (* Push constant (value) *)$/;"	C	type:code
+CONST	.\keiko.mli	/^    CONST of int                (* Push constant (value) *)$/;"	C	type:code
+Call	.\tree.ml	/^  | Call of name * expr list$/;"	C	type:expr
+Call	.\tree.mli	/^  | Call of name * expr list$/;"	C	type:expr
+Check	.\check.ml	/^(* lab3\/check.ml *)$/;"	M
+Check	.\check.mli	/^(* lab3\/check.mli *)$/;"	M
+DO	.\parser.ml	/^  | DO$/;"	C	type:token
+DO	.\parser.mli	/^  | DO$/;"	C	type:token
+DOT	.\parser.ml	/^  | DOT$/;"	C	type:token
+DOT	.\parser.mli	/^  | DOT$/;"	C	type:token
+Dict	.\dict.ml	/^(* lab3\/dict.ml *)$/;"	M
+Dict	.\dict.mli	/^(* lab3\/dict.mli *)$/;"	M
+Div	.\keiko.ml	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+Div	.\keiko.mli	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+ELSE	.\parser.ml	/^  | ELSE$/;"	C	type:token
+ELSE	.\parser.mli	/^  | ELSE$/;"	C	type:token
+END	.\parser.ml	/^  | END$/;"	C	type:token
+END	.\parser.mli	/^  | END$/;"	C	type:token
+EOF	.\parser.ml	/^  | EOF$/;"	C	type:token
+EOF	.\parser.mli	/^  | EOF$/;"	C	type:token
+Env	.\dict.ml	/^type environment = Env of def list * def IdMap.t$/;"	C	type:environment
+Eq	.\keiko.ml	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+Eq	.\keiko.mli	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+Equiv	.\peepopt.ml	/^  | Equiv of codelab                    (* A label that's been merged *)$/;"	C	type:lab_data
+GLOBAL	.\keiko.ml	/^  | GLOBAL of string            (* Push global address (name) *)$/;"	C	type:code
+GLOBAL	.\keiko.mli	/^  | GLOBAL of string            (* Push global address (name) *)$/;"	C	type:code
+Geq	.\keiko.ml	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Geq	.\keiko.mli	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Gt	.\keiko.ml	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Gt	.\keiko.mli	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+IDENT	.\parser.ml	/^  | IDENT of (string)$/;"	C	type:token
+IDENT	.\parser.mli	/^  | IDENT of (string)$/;"	C	type:token
+IF	.\parser.ml	/^  | IF$/;"	C	type:token
+IF	.\parser.mli	/^  | IF$/;"	C	type:token
+IdMap	.\dict.ml	/^module IdMap = Map.Make(struct type t = ident  let compare = compare end)$/;"	M
+IfStmt	.\tree.ml	/^  | IfStmt of expr * stmt * stmt$/;"	C	type:stmt
+IfStmt	.\tree.mli	/^  | IfStmt of expr * stmt * stmt$/;"	C	type:stmt
+JUMP	.\keiko.ml	/^  | JUMP of codelab             (* Unconditional branch (dest) *)$/;"	C	type:code
+JUMP	.\keiko.mli	/^  | JUMP of codelab             (* Unconditional branch (dest) *)$/;"	C	type:code
+JUMPB	.\keiko.ml	/^  | JUMPB of bool * codelab     (* Branch on boolean (val, dest) *)$/;"	C	type:code
+JUMPB	.\keiko.mli	/^  | JUMPB of bool * codelab     (* Branch on boolean (val, dest) *)$/;"	C	type:code
+JUMPC	.\keiko.ml	/^  | JUMPC of op * codelab       (* Conditional branch (op, dest) *)$/;"	C	type:code
+JUMPC	.\keiko.mli	/^  | JUMPC of op * codelab       (* Conditional branch (op, dest) *)$/;"	C	type:code
+Keiko	.\keiko.ml	/^(* common\/keiko.ml *)$/;"	M
+Keiko	.\keiko.mli	/^(* common\/keiko.mli *)$/;"	M
+Kgen	.\kgen.ml	/^(* lab3\/kgen.ml *)$/;"	M
+Kgen	.\kgen.mli	/^(* lab3\/kgen.mli *)$/;"	M
+LABEL	.\keiko.ml	/^  | LABEL of codelab            (* Set code label *)$/;"	C	type:code
+LABEL	.\keiko.mli	/^  | LABEL of codelab            (* Set code label *)$/;"	C	type:code
+LDGW	.\keiko.ml	/^  | LDGW of string              (* Load value (name) *)$/;"	C	type:code
+LDGW	.\keiko.mli	/^  | LDGW of string              (* Load value (name) *)$/;"	C	type:code
+LINE	.\keiko.ml	/^  | LINE of int$/;"	C	type:code
+LINE	.\keiko.mli	/^  | LINE of int$/;"	C	type:code
+LOADC	.\keiko.ml	/^  | LOADC                       (* Load character *)$/;"	C	type:code
+LOADC	.\keiko.mli	/^  | LOADC                       (* Load character *)$/;"	C	type:code
+LOADW	.\keiko.ml	/^  | LOADW                       (* Load word *)$/;"	C	type:code
+LOADW	.\keiko.mli	/^  | LOADW                       (* Load word *)$/;"	C	type:code
+LOCAL	.\keiko.ml	/^  | LOCAL of int                (* Push local adddress (offset) *)$/;"	C	type:code
+LOCAL	.\keiko.mli	/^  | LOCAL of int                (* Push local adddress (offset) *)$/;"	C	type:code
+LPAR	.\parser.ml	/^  | LPAR$/;"	C	type:token
+LPAR	.\parser.mli	/^  | LPAR$/;"	C	type:token
+LabDef	.\peepopt.ml	/^    LabDef of labrec                    (* An extant label *)$/;"	C	type:lab_data
+Leq	.\keiko.ml	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Leq	.\keiko.mli	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Lexer	.\lexer.ml	/^# 3 "lexer.mll"$/;"	M
+Lexer	.\lexer.mli	/^(* lab3\/lexer.mli *)$/;"	M
+Lt	.\keiko.ml	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Lt	.\keiko.mli	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+MINUS	.\parser.ml	/^  | MINUS$/;"	C	type:token
+MINUS	.\parser.mli	/^  | MINUS$/;"	C	type:token
+MONOP	.\keiko.ml	/^  | MONOP of op                 (* Perform unary operation (op) *)$/;"	C	type:code
+MONOP	.\keiko.mli	/^  | MONOP of op                 (* Perform unary operation (op) *)$/;"	C	type:code
+MONOP	.\parser.ml	/^  | MONOP of (Keiko.op)$/;"	C	type:token
+MONOP	.\parser.mli	/^  | MONOP of (Keiko.op)$/;"	C	type:token
+MULOP	.\parser.ml	/^  | MULOP of (Keiko.op)$/;"	C	type:token
+MULOP	.\parser.mli	/^  | MULOP of (Keiko.op)$/;"	C	type:token
+Main	.\main.ml	/^(* lab3\/main.ml *)$/;"	M
+Minus	.\keiko.ml	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+Minus	.\keiko.mli	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+Mod	.\keiko.ml	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+Mod	.\keiko.mli	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+Monop	.\tree.ml	/^  | Monop of Keiko.op * expr$/;"	C	type:expr
+Monop	.\tree.mli	/^  | Monop of Keiko.op * expr$/;"	C	type:expr
+NEWLINE	.\parser.ml	/^  | NEWLINE$/;"	C	type:token
+NEWLINE	.\parser.mli	/^  | NEWLINE$/;"	C	type:token
+NOP	.\keiko.ml	/^  | NOP$/;"	C	type:code
+NOP	.\keiko.mli	/^  | NOP$/;"	C	type:code
+NUMBER	.\parser.ml	/^  | NUMBER of (int)$/;"	C	type:token
+NUMBER	.\parser.mli	/^  | NUMBER of (int)$/;"	C	type:token
+Neq	.\keiko.ml	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Neq	.\keiko.mli	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Newline	.\tree.ml	/^  | Newline$/;"	C	type:stmt
+Newline	.\tree.mli	/^  | Newline$/;"	C	type:stmt
+Not	.\keiko.ml	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Not	.\keiko.mli	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Number	.\tree.ml	/^    Number of int$/;"	C	type:expr
+Number	.\tree.mli	/^    Number of int$/;"	C	type:expr
+Or	.\keiko.ml	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Or	.\keiko.mli	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+PACK	.\keiko.ml	/^  | PACK                        (* Pack two values into one *)$/;"	C	type:code
+PACK	.\keiko.mli	/^  | PACK                        (* Pack two values into one *)$/;"	C	type:code
+PCALL	.\keiko.ml	/^  | PCALL of int                (* Call procedure *)$/;"	C	type:code
+PCALL	.\keiko.mli	/^  | PCALL of int                (* Call procedure *)$/;"	C	type:code
+PCALLW	.\keiko.ml	/^  | PCALLW of int               (* Proc call with result (nargs) *)$/;"	C	type:code
+PCALLW	.\keiko.mli	/^  | PCALLW of int               (* Proc call with result (nargs) *)$/;"	C	type:code
+PRINT	.\parser.ml	/^  | PRINT$/;"	C	type:token
+PRINT	.\parser.mli	/^  | PRINT$/;"	C	type:token
+PROC	.\parser.ml	/^  | PROC$/;"	C	type:token
+PROC	.\parser.mli	/^  | PROC$/;"	C	type:token
+Parser	.\parser.ml	/^type token =$/;"	M
+Parser	.\parser.mli	/^type token =$/;"	M
+Peepopt	.\peepopt.ml	/^(* ppc\/peepopt.ml *)$/;"	M
+Peepopt	.\peepopt.mli	/^(* ppc\/peepopt.mli *)$/;"	M
+Plus	.\keiko.ml	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+Plus	.\keiko.mli	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+PlusA	.\keiko.ml	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+PlusA	.\keiko.mli	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Print	.\print.ml	/^(* common\/print.ml *)$/;"	M
+Print	.\print.mli	/^(* common\/print.mli *)$/;"	M
+Print	.\tree.ml	/^  | Print of expr$/;"	C	type:stmt
+Print	.\tree.mli	/^  | Print of expr$/;"	C	type:stmt
+Proc	.\tree.ml	/^and proc = Proc of name * ident list * block$/;"	C	type:proc
+Proc	.\tree.mli	/^and proc = Proc of name * ident list * block$/;"	C	type:proc
+ProcDef	.\dict.ml	/^  | ProcDef of int              (* Procedure (nparams) *)$/;"	C	type:def_kind
+ProcDef	.\dict.mli	/^  | ProcDef of int              (* Procedure (label, nparams) *)$/;"	C	type:def_kind
+Program	.\tree.ml	/^type program = Program of block$/;"	C	type:program
+Program	.\tree.mli	/^type program = Program of block$/;"	C	type:program
+RELOP	.\parser.ml	/^  | RELOP of (Keiko.op)$/;"	C	type:token
+RELOP	.\parser.mli	/^  | RELOP of (Keiko.op)$/;"	C	type:token
+RETURN	.\parser.ml	/^  | RETURN$/;"	C	type:token
+RETURN	.\parser.mli	/^  | RETURN$/;"	C	type:token
+RETURNW	.\keiko.ml	/^  | RETURNW                     (* Return from procedure *)$/;"	C	type:code
+RETURNW	.\keiko.mli	/^  | RETURNW                     (* Return from procedure *)$/;"	C	type:code
+RPAR	.\parser.ml	/^  | RPAR$/;"	C	type:token
+RPAR	.\parser.mli	/^  | RPAR$/;"	C	type:token
+Return	.\tree.ml	/^  | Return of expr$/;"	C	type:stmt
+Return	.\tree.mli	/^  | Return of expr$/;"	C	type:stmt
+SEMI	.\parser.ml	/^  | SEMI$/;"	C	type:token
+SEMI	.\parser.mli	/^  | SEMI$/;"	C	type:token
+SEQ	.\keiko.ml	/^  | SEQ of code list$/;"	C	type:code
+SEQ	.\keiko.mli	/^  | SEQ of code list$/;"	C	type:code
+STGW	.\keiko.ml	/^  | STGW of string              (* Store (name) *)$/;"	C	type:code
+STGW	.\keiko.mli	/^  | STGW of string              (* Store (name) *)$/;"	C	type:code
+STOREC	.\keiko.ml	/^  | STOREC                      (* Store character *)$/;"	C	type:code
+STOREC	.\keiko.mli	/^  | STOREC                      (* Store character *)$/;"	C	type:code
+STOREW	.\keiko.ml	/^  | STOREW                      (* Store word *)$/;"	C	type:code
+STOREW	.\keiko.mli	/^  | STOREW                      (* Store word *)$/;"	C	type:code
+Semantic_error	.\check.ml	/^exception Semantic_error of string * Print.arg list * int$/;"	e
+Semantic_error	.\check.mli	/^exception Semantic_error of string * Print.arg list * int$/;"	e
+Seq	.\tree.ml	/^  | Seq of stmt list$/;"	C	type:stmt
+Seq	.\tree.mli	/^  | Seq of stmt list$/;"	C	type:stmt
+Skip	.\tree.ml	/^    Skip$/;"	C	type:stmt
+Skip	.\tree.mli	/^    Skip$/;"	C	type:stmt
+Source	.\source.ml	/^(* common\/source.ml *)$/;"	M
+Source	.\source.mli	/^(* common\/source.mli *)$/;"	M
+THEN	.\parser.ml	/^  | THEN$/;"	C	type:token
+THEN	.\parser.mli	/^  | THEN$/;"	C	type:token
+Times	.\keiko.ml	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+Times	.\keiko.mli	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	C	type:op
+Tree	.\tree.ml	/^(* lab3\/tree.ml *)$/;"	M
+Tree	.\tree.mli	/^(* lab3\/tree.mli *)$/;"	M
+UNPACK	.\keiko.ml	/^  | UNPACK                      (* Unpack one value into two *)$/;"	C	type:code
+UNPACK	.\keiko.mli	/^  | UNPACK                      (* Unpack one value into two *)$/;"	C	type:code
+Uminus	.\keiko.ml	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+Uminus	.\keiko.mli	/^  | Uminus | Lt | Gt | Leq | Geq | Neq | And | Or | Not | PlusA$/;"	C	type:op
+VAR	.\parser.ml	/^  | VAR$/;"	C	type:token
+VAR	.\parser.mli	/^  | VAR$/;"	C	type:token
+VarDef	.\dict.ml	/^    VarDef                      (* Variable *)$/;"	C	type:def_kind
+VarDef	.\dict.mli	/^    VarDef                      (* Variable (offset) *)$/;"	C	type:def_kind
+Variable	.\tree.ml	/^  | Variable of name$/;"	C	type:expr
+Variable	.\tree.mli	/^  | Variable of name$/;"	C	type:expr
+WHILE	.\parser.ml	/^  | WHILE$/;"	C	type:token
+WHILE	.\parser.mli	/^  | WHILE$/;"	C	type:token
+WhileStmt	.\tree.ml	/^  | WhileStmt of expr * stmt$/;"	C	type:stmt
+WhileStmt	.\tree.mli	/^  | WhileStmt of expr * stmt$/;"	C	type:stmt
+add_def	.\check.ml	/^let add_def d env =$/;"	v
+annotate	.\check.ml	/^let annotate (Program (Block (vars, procs, body))) =$/;"	v
+annotate	.\check.mli	/^val annotate : program -> unit$/;"	v
+arg	.\print.ml	/^type arg = vtable -> unit$/;"	t
+arg	.\print.mli	/^type arg$/;"	t
+arg_base	.\check.ml	/^let arg_base = 16$/;"	v
+block	.\tree.ml	/^type block = Block of ident list * proc list * stmt$/;"	t
+block	.\tree.mli	/^type block = Block of ident list * proc list * stmt$/;"	t
+can	.\dict.ml	/^let can f x = try f x; true with Not_found -> false$/;"	v
+canon	.\keiko.ml	/^let canon x =$/;"	v
+canon	.\keiko.mli	/^val canon : code -> code$/;"	v
+chan	.\source.ml	/^let chan = ref stdin$/;"	v
+check_expr	.\check.ml	/^let rec check_expr env =$/;"	v
+check_proc	.\check.ml	/^let rec check_proc lev env (Proc (p, formals, Block (vars, procs, body))) =$/;"	v
+check_stmt	.\check.ml	/^let rec check_stmt inproc env =$/;"	v
+code	.\keiko.ml	/^type code =$/;"	t
+code	.\keiko.mli	/^type code =$/;"	t
+codelab	.\dict.ml	/^type codelab = int$/;"	t
+codelab	.\dict.mli	/^type codelab = int$/;"	t
+codelab	.\keiko.ml	/^type codelab = int$/;"	t
+codelab	.\keiko.mli	/^type codelab = int$/;"	t
+comment	.\lexer.ml	/^and comment lexbuf =$/;"	v
+compare	.\dict.ml	/^module IdMap = Map.Make(struct type t = ident  let compare = compare end)$/;"	v
+d_kind	.\dict.ml	/^    d_kind : def_kind;          (* Definition *)$/;"	r	type:def
+d_kind	.\dict.mli	/^    d_kind : def_kind;          (* Definition *)$/;"	r	type:def
+d_lab	.\dict.ml	/^    d_lab : string;             (* Label if global *)$/;"	r	type:def
+d_lab	.\dict.mli	/^    d_lab : string;             (* Label if global *)$/;"	r	type:def
+d_level	.\dict.ml	/^    d_level : int;              (* Nesting level *)$/;"	r	type:def
+d_level	.\dict.mli	/^    d_level : int;              (* Nesting level *)$/;"	r	type:def
+d_off	.\dict.ml	/^    d_off : int }               (* Offset if local *)$/;"	r	type:def
+d_off	.\dict.mli	/^    d_off : int }               (* Offset if local *)$/;"	r	type:def
+d_tag	.\dict.ml	/^  { d_tag : ident;              (* Name *)$/;"	r	type:def
+d_tag	.\dict.mli	/^  { d_tag : ident;              (* Name *)$/;"	r	type:def
+debug	.\peepopt.ml	/^let debug = ref 0$/;"	v
+debug	.\peepopt.mli	/^val debug: int ref$/;"	v
+declare_arg	.\check.ml	/^let declare_arg lev env (i, x) =$/;"	v
+declare_global	.\check.ml	/^let declare_global env x =$/;"	v
+declare_local	.\check.ml	/^let declare_local lev env (i, x) =$/;"	v
+declare_proc	.\check.ml	/^let declare_proc lev env (Proc (p, formals, body)) =$/;"	v
+def	.\dict.ml	/^type def = $/;"	t
+def	.\dict.mli	/^type def = $/;"	t
+def_kind	.\dict.ml	/^and def_kind =$/;"	t
+def_kind	.\dict.mli	/^and def_kind =$/;"	t
+define	.\dict.ml	/^let define d (Env (b, m)) = $/;"	v
+define	.\dict.mli	/^val define : def -> environment -> environment$/;"	v
+do_grind	.\print.ml	/^let rec do_grind fmt args0 =$/;"	v
+do_print	.\print.ml	/^let rec do_print outch fmt args0 =$/;"	v
+do_print	.\print.mli	/^val do_print : (char -> unit) -> string -> arg list -> unit$/;"	v
+do_refs	.\peepopt.ml	/^let do_refs f =$/;"	v
+drop	.\peepopt.ml	/^let rec drop n =$/;"	v
+empty	.\dict.ml	/^let empty = Env ([], IdMap.empty)$/;"	v
+empty	.\dict.mli	/^val empty : environment$/;"	v
+environment	.\dict.ml	/^type environment = Env of def list * def IdMap.t$/;"	t
+environment	.\dict.mli	/^type environment$/;"	t
+equate	.\peepopt.ml	/^let equate x1 x2 =$/;"	v
+err_line	.\check.ml	/^let err_line = ref 1$/;"	v
+err_message	.\source.ml	/^let err_message fmt args ln =$/;"	v
+err_message	.\source.mli	/^val err_message : string -> Print.arg list -> int -> unit$/;"	v
+expr	.\tree.ml	/^type expr = $/;"	t
+expr	.\tree.mli	/^type expr = $/;"	t
+fBlock	.\tree.ml	/^let rec fBlock (Block (vs, ps, body)) =$/;"	v
+fBool	.\print.ml	/^let fBool b = fStr (if b then "true" else "false")$/;"	v
+fBool	.\print.mli	/^val fBool : bool -> arg         (* Boolean *)$/;"	v
+fChr	.\print.ml	/^let fChr ch vt = vt.outch ch$/;"	v
+fChr	.\print.mli	/^val fChr : char -> arg          (* Character *)$/;"	v
+fExpr	.\tree.ml	/^let rec fExpr =$/;"	v
+fExt	.\print.ml	/^let fExt g vt = g vt.prf$/;"	v
+fExt	.\print.mli	/^val fExt : ((string -> arg list -> unit) -> unit) -> arg$/;"	v
+fFix	.\print.ml	/^let fFix (n, w) =$/;"	v
+fFix	.\print.mli	/^val fFix : int * int -> arg     (* Fixed-width number (val, width) *)$/;"	v
+fFlo	.\print.ml	/^let fFlo x = fStr (string_of_float x)$/;"	v
+fFlo	.\print.mli	/^val fFlo : float -> arg         (* Floating-point number *)$/;"	v
+fInst	.\keiko.ml	/^let fInst =$/;"	v
+fInst	.\keiko.mli	/^val fInst : code -> Print.arg$/;"	v
+fLab	.\keiko.ml	/^let fLab n = fMeta "$" [fNum n]$/;"	v
+fList	.\print.mli	/^val fList : ('a -> arg) -> 'a list -> arg$/;"	v
+fList	.\tree.ml	/^let fList f =$/;"	v
+fMeta	.\print.ml	/^let fMeta fmt args = fExt (function prf -> prf fmt args)$/;"	v
+fMeta	.\print.mli	/^val fMeta : string -> arg list -> arg$/;"	v
+fName	.\tree.ml	/^let fName x = fStr x.x_name$/;"	v
+fNum	.\print.ml	/^let fNum n = fStr (string_of_int n)$/;"	v
+fNum	.\print.mli	/^val fNum : int -> arg           (* Decimal number *)$/;"	v
+fOp	.\keiko.ml	/^let fOp w = fStr (String.uppercase (op_name w))$/;"	v
+fStmt	.\tree.ml	/^let rec fStmt = $/;"	v
+fStr	.\print.ml	/^let fStr s vt = $/;"	v
+fStr	.\print.mli	/^val fStr : string -> arg        (* String *)$/;"	v
+fTail	.\tree.ml	/^let fTail f xs =$/;"	v
+fgrindf	.\print.ml	/^let rec fgrindf fp pfx fmt args =$/;"	v
+fgrindf	.\print.mli	/^val fgrindf : out_channel -> string -> string -> arg list -> unit$/;"	v
+filename	.\source.ml	/^let filename = ref ""$/;"	v
+find_def	.\dict.ml	/^let find_def x ds =$/;"	v
+find_label	.\peepopt.ml	/^let rec find_label x =$/;"	v
+fprintf	.\print.ml	/^let fprintf fp fmt args = do_print (output_char fp) fmt args$/;"	v
+fprintf	.\print.mli	/^val fprintf : out_channel -> string -> arg list -> unit$/;"	v
+gen_addr	.\kgen.ml	/^let gen_addr d = gen_addr_lvl !level d$/;"	v
+gen_addr_lvl	.\kgen.ml	/^let rec gen_addr_lvl lvl d=$/;"	v
+gen_cond	.\kgen.ml	/^let rec gen_cond tlab flab e =$/;"	v
+gen_expr	.\kgen.ml	/^let rec gen_expr =$/;"	v
+gen_proc	.\kgen.ml	/^let rec gen_proc (Proc (p, formals, Block (vars, procs, body))) =$/;"	v
+gen_stmt	.\kgen.ml	/^let rec gen_stmt =$/;"	v
+get_def	.\tree.ml	/^let get_def x =$/;"	v
+get_def	.\tree.mli	/^val get_def : name -> def$/;"	v
+get_label	.\peepopt.ml	/^let get_label x =$/;"	v
+get_line	.\source.ml	/^let get_line n =$/;"	v
+get_line	.\source.mli	/^val get_line : int -> string$/;"	v
+ident	.\dict.ml	/^type ident = string$/;"	t
+ident	.\dict.mli	/^type ident = string$/;"	t
+in_chan	.\main.ml	/^  let in_chan = open_in in_file in$/;"	v
+init	.\source.ml	/^let init fn ch =$/;"	v
+init	.\source.mli	/^val init : string -> in_channel -> unit$/;"	v
+lab	.\dict.ml	/^let lab = ref 0$/;"	v
+lab	.\keiko.ml	/^let lab = ref 0$/;"	v
+lab_data	.\peepopt.ml	/^type lab_data = $/;"	t
+label	.\dict.ml	/^let label () = incr lab; !lab$/;"	v
+label	.\dict.mli	/^val label : unit -> codelab$/;"	v
+label	.\keiko.ml	/^let label () = incr lab; !lab$/;"	v
+label	.\keiko.mli	/^val label : unit -> codelab$/;"	v
+label_tab	.\peepopt.ml	/^let label_tab = Hashtbl.create 257$/;"	v
+labrec	.\peepopt.ml	/^and labrec =$/;"	t
+level	.\kgen.ml	/^let level = ref 0$/;"	v
+lexbuf	.\main.ml	/^  let lexbuf = Lexing.from_channel in_chan in$/;"	v
+lineno	.\lexer.ml	/^let lineno = ref 1$/;"	v
+lineno	.\lexer.mli	/^val lineno : int ref$/;"	v
+linetab	.\source.ml	/^let linetab = Hashtbl.create 100$/;"	v
+loc_base	.\check.ml	/^let loc_base = 0$/;"	v
+lookup	.\dict.ml	/^let lookup x (Env (b, m)) = IdMap.find x m$/;"	v
+lookup	.\dict.mli	/^val lookup : ident -> environment -> def$/;"	v
+lookup_def	.\check.ml	/^let lookup_def env x =$/;"	v
+main	.\main.ml	/^let main () =$/;"	v
+makeName	.\tree.ml	/^let makeName x ln = $/;"	v
+makeName	.\tree.mli	/^val makeName : ident -> int -> name$/;"	v
+make_hash	.\lexer.ml	/^let make_hash n ps =$/;"	v
+mark_line	.\keiko.ml	/^let mark_line n ys =$/;"	v
+name	.\tree.ml	/^type name = $/;"	t
+name	.\tree.mli	/^type name = $/;"	t
+new_block	.\dict.ml	/^let new_block (Env (b, m)) = Env ([], m)$/;"	v
+new_block	.\dict.mli	/^val new_block : environment -> environment$/;"	v
+note_line	.\source.ml	/^let note_line n lexbuf =$/;"	v
+note_line	.\source.mli	/^val note_line : int -> Lexing.lexbuf -> unit$/;"	v
+op	.\keiko.ml	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	t
+op	.\keiko.mli	/^type op = Plus | Minus | Times | Div | Mod | Eq $/;"	t
+op_name	.\keiko.ml	/^let op_name =$/;"	v
+op_name	.\keiko.mli	/^val op_name : op -> string$/;"	v
+opposite	.\peepopt.ml	/^let opposite =$/;"	v
+optflag	.\kgen.ml	/^let optflag = ref false$/;"	v
+optflag	.\kgen.mli	/^val optflag : bool ref$/;"	v
+optimise	.\peepopt.ml	/^let optimise prog =$/;"	v
+optimise	.\peepopt.mli	/^val optimise : Keiko.code -> Keiko.code$/;"	v
+optstep	.\peepopt.ml	/^let optstep rules changed code =$/;"	v
+outch	.\print.ml	/^and vtable = { outch : char -> unit; prf : string -> arg list -> unit }$/;"	r	type:vtable
+output	.\keiko.ml	/^let output code =$/;"	v
+output	.\keiko.mli	/^val output : code -> unit$/;"	v
+ppc	.\main.ml	/^let ppc = main ()$/;"	v
+prf	.\print.ml	/^and vtable = { outch : char -> unit; prf : string -> arg list -> unit }$/;"	r	type:vtable
+print_tree	.\tree.ml	/^let print_tree fp (Program b) =$/;"	v
+print_tree	.\tree.mli	/^val print_tree : out_channel -> program -> unit$/;"	v
+printf	.\print.ml	/^let printf fmt args = fprintf stdout fmt args; flush stdout$/;"	v
+printf	.\print.mli	/^val printf : string -> arg list -> unit$/;"	v
+proc	.\tree.ml	/^and proc = Proc of name * ident list * block$/;"	t
+proc	.\tree.mli	/^and proc = Proc of name * ident list * block$/;"	t
+prog	.\main.ml	/^  let prog = try Parser.program Lexer.token lexbuf with$/;"	v
+program	.\parser.mli	/^val program :$/;"	v
+program	.\tree.ml	/^type program = Program of block$/;"	t
+program	.\tree.mli	/^type program = Program of block$/;"	t
+ref_count	.\peepopt.ml	/^let ref_count x = let y = find_label x in y.y_refct$/;"	v
+rename	.\peepopt.ml	/^let rename x = let y = find_label x in y.y_id$/;"	v
+rename_labs	.\peepopt.ml	/^let rename_labs =$/;"	v
+rewrite	.\peepopt.ml	/^let rewrite rules prog =$/;"	v
+ruleset	.\peepopt.ml	/^let ruleset replace =$/;"	v
+same_lab	.\peepopt.ml	/^let same_lab x1 x2 = (rename x1 = rename x2)$/;"	v
+sem_error	.\check.ml	/^let sem_error fmt args = $/;"	v
+seq	.\tree.ml	/^let seq =$/;"	v
+seq	.\tree.mli	/^val seq : stmt list -> stmt$/;"	v
+serialize	.\check.ml	/^let serialize xs = $/;"	v
+slink	.\kgen.ml	/^let slink = 12$/;"	v
+sprintf	.\print.ml	/^let sprintf fmt args =$/;"	v
+sprintf	.\print.mli	/^val sprintf : string -> arg list -> string$/;"	v
+stmt	.\tree.ml	/^type stmt =$/;"	t
+stmt	.\tree.mli	/^type stmt =$/;"	t
+t	.\dict.ml	/^module IdMap = Map.Make(struct type t = ident  let compare = compare end)$/;"	t
+take	.\peepopt.ml	/^let rec take n =$/;"	v
+token	.\lexer.ml	/^let rec token lexbuf =$/;"	v
+token	.\lexer.mli	/^val token : Lexing.lexbuf -> Parser.token$/;"	v
+token	.\parser.ml	/^type token =$/;"	t
+token	.\parser.mli	/^type token =$/;"	t
+translate	.\kgen.ml	/^let translate (Program (Block (vars, procs, body))) =$/;"	v
+translate	.\kgen.mli	/^val translate : Tree.program -> unit$/;"	v
+vtable	.\print.ml	/^and vtable = { outch : char -> unit; prf : string -> arg list -> unit }$/;"	t
+x_def	.\tree.ml	/^    mutable x_def: def option } (* Definition in scope *)$/;"	r	type:name
+x_def	.\tree.mli	/^    mutable x_def: def option}  (* Definition in scope *)$/;"	r	type:name
+x_line	.\tree.ml	/^    x_line: int;                (* Line number *)$/;"	r	type:name
+x_line	.\tree.mli	/^    x_line: int;                (* Line number *)$/;"	r	type:name
+x_name	.\tree.ml	/^  { x_name: ident;              (* Name of the reference *)$/;"	r	type:name
+x_name	.\tree.mli	/^  { x_name: ident;              (* Name of the reference *)$/;"	r	type:name
+y_id	.\peepopt.ml	/^  { y_id: codelab;                      (* Name of the label *)$/;"	r	type:labrec
+y_refct	.\peepopt.ml	/^    y_refct: int ref }                  (* Reference count *)$/;"	r	type:labrec
+yyact	.\parser.ml	/^let yyact = [|$/;"	v
+yycheck	.\parser.ml	/^let yycheck = "\\010\\000\\$/;"	v
+yydefred	.\parser.ml	/^let yydefred = "\\000\\000\\$/;"	v
+yydgoto	.\parser.ml	/^let yydgoto = "\\002\\000\\$/;"	v
+yygindex	.\parser.ml	/^let yygindex = "\\000\\000\\$/;"	v
+yylen	.\parser.ml	/^let yylen = "\\002\\000\\$/;"	v
+yylhs	.\parser.ml	/^let yylhs = "\\255\\255\\$/;"	v
+yynames_block	.\parser.ml	/^let yynames_block = "\\$/;"	v
+yynames_const	.\parser.ml	/^let yynames_const = "\\$/;"	v
+yyrindex	.\parser.ml	/^let yyrindex = "\\000\\000\\$/;"	v
+yysindex	.\parser.ml	/^let yysindex = "\\047\\000\\$/;"	v
+yytable	.\parser.ml	/^let yytable = "\\016\\000\\$/;"	v
+yytablesize	.\parser.ml	/^let yytablesize = 158$/;"	v
+yytransl_block	.\parser.ml	/^let yytransl_block = [|$/;"	v
+yytransl_const	.\parser.ml	/^let yytransl_const = [|$/;"	v

@@ -1,0 +1,7 @@
+Exception: STATUS_ACCESS_VIOLATION at eip=004043B1
+eax=FFD3FE78 ebx=FFE9FF20 ecx=00000000 edx=00000001 esi=800485F8 edi=FFE9FF10
+ebp=80048551 esp=0028CBC0 program=C:\Users\Anthony\Documents\GitHub\COMPILERS\keiko\ppx.exe, pid 10220, thread main
+cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
+Stack trace:
+Frame     Function  Args
+End of stack trace

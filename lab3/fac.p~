@@ -1,0 +1,14 @@
+(* lab3/fac.p *)
+
+proc fac(i);
+begin
+    return 1
+end;
+
+begin
+  print 10; newline
+end.
+
+(*<<
+ 3628800
+>>*)

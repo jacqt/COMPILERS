@@ -34,8 +34,8 @@ let rec check_expr env =
         begin
           match d.d_kind with
               VarDef -> ()
-            | ProcDef _ -> ()
-                (*sem_error "$ is not a variable" [fStr x.x_name]*)
+            | ProcDef _ ->
+                sem_error "$ is not a variable" [fStr x.x_name]
         end
     | Monop (w, e1) -> 
         check_expr env e1
