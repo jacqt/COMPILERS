@@ -10,7 +10,7 @@ proc a(x);
     proc c(z);
       proc BOOM(asdf);
       begin 
-        return asdf + 3;
+        return asdf + OMG;
       end;
     begin 
       return z + d(4) + BOOM(0);

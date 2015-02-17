@@ -11,14 +11,34 @@ let level = ref 0
 
 let slink = 12
 
+
 let rec gen_addr_lvl lvl d=
+  (*let _ = Printf.printf "%8d %8d\n" lvl d.d_level in *)
+  if lvl  = d.d_level then
+    CONST d.d_off
+  else
+    SEQ [CONST  12; BINOP Plus; LOADW; gen_addr_lvl (lvl-1) d; ]
+
+(*|gen_addr| -- generate code to push address of a variable *)
+let gen_addr d = 
   if d.d_level = 0 || d.d_off = 0 then
     GLOBAL d.d_lab
   else
-    SEQ [LOCAL ((lvl - d.d_level) * 12); LOADW; gen_addr_lvl (lvl-1) d; BINOP Plus; ]
+    SEQ [LOCAL  0; gen_addr_lvl (!level) d; BINOP Plus; ]
 
-(* |gen_addr| -- generate code to push address of a variable *)
-let gen_addr d = gen_addr_lvl !level d
+
+
+(*let rec gen_addr_lvl lvl d=*)
+  (*if d.d_level = 0 || d.d_off = 0 then*)
+    (*GLOBAL d.d_lab*)
+  (*else*)
+    (*if lvl = 0 then *)
+        (*CONST d.d_off else*)
+    (*SEQ [LOCAL ((lvl - d.d_level) * 12); LOADW; gen_addr_lvl (lvl-1) d; BINOP Plus; ]*)
+
+
+(*[> |gen_addr| -- generate code to push address of a variable <]*)
+(*let gen_addr d = gen_addr_lvl !level d*)
 
 (* |gen_expr| -- generate code for an expression *)
 let rec gen_expr =
