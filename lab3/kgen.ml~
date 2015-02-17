@@ -13,7 +13,6 @@ let slink = 12
 
 
 let rec gen_addr_lvl lvl d=
-  (*let _ = Printf.printf "%8d %8d\n" lvl d.d_level in *)
   if lvl  = d.d_level then
     CONST d.d_off
   else

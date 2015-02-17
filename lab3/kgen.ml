@@ -25,20 +25,6 @@ let gen_addr d =
   else
     SEQ [LOCAL  0; gen_addr_lvl (!level) d; BINOP Plus; ]
 
-
-
-(*let rec gen_addr_lvl lvl d=*)
-  (*if d.d_level = 0 || d.d_off = 0 then*)
-    (*GLOBAL d.d_lab*)
-  (*else*)
-    (*if lvl = 0 then *)
-        (*CONST d.d_off else*)
-    (*SEQ [LOCAL ((lvl - d.d_level) * 12); LOADW; gen_addr_lvl (lvl-1) d; BINOP Plus; ]*)
-
-
-(*[> |gen_addr| -- generate code to push address of a variable <]*)
-(*let gen_addr d = gen_addr_lvl !level d*)
-
 (* |gen_expr| -- generate code for an expression *)
 let rec gen_expr =
   function
