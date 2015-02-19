@@ -11,12 +11,13 @@ let level = ref 0
 
 let slink = 12
 
+let get_slink d = (!level - d.d_level + 1) * 12
 
 let rec gen_addr_lvl lvl d=
   if lvl  = d.d_level then
     CONST d.d_off
   else
-    SEQ [CONST  12; BINOP Plus; LOADW; gen_addr_lvl (lvl-1) d; ]
+    SEQ [CONST slink; BINOP Plus; LOADW; gen_addr_lvl (lvl-1) d; ]
 
 (*|gen_addr| -- generate code to push address of a variable *)
 let gen_addr d = 
@@ -48,7 +49,8 @@ let rec gen_expr =
         let gen_list_expr builtup = function e -> SEQ [builtup; gen_expr e] in
             SEQ [LINE p.x_line;
                 List.fold_left gen_list_expr (SEQ[]) (List.rev args); 
-                LOCAL 0;
+                LOCAL (get_slink (get_def p));
+                (*LOCAL 0;*)
                 gen_addr (get_def p);
                 PCALLW (List.length args)]
 
