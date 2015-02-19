@@ -55,10 +55,10 @@ let rec gen_expr =
         let gen_list_expr builtup = function e -> SEQ [builtup; gen_expr e] in
         let get_instr d =
           match d.d_kind with 
-            VarDef -> SEQ [gen_addr d; LOADW; UNPACK]
+              VarDef -> SEQ [gen_addr d; LOADW; UNPACK]
             | ProcDef nargs ->  SEQ [get_slink d; gen_addr d;] in
             SEQ [LINE p.x_line;
-                List.fold_left gen_list_expr (SEQ[]) (List.rev args); 
+                SEQ (List.map gen_expr (List.rev args)); 
                 get_instr (get_def p);
                 PCALLW (List.length args)]
 
