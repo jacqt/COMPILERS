@@ -7,16 +7,24 @@ proc a(x);
     return ok;
   end;
   proc b(y);
-    proc c(z);
+    proc c();
+    begin 
+      return last();
+    end;
+    proc last();
+    begin
+      return y;
+    end;
+    proc f(z);
       proc BOOM(asdf);
       begin 
         return asdf + OMG;
       end;
     begin 
-      return z + d(4) + BOOM(0);
+      return z + d(4) + BOOM(0) + c();
     end;
   begin
-    return y + c(5);
+    return y + f(5);
   end;
 begin
   OMG := 3;
@@ -28,5 +36,5 @@ begin
 end.
 
 (*<<
- 15
+ 18
 >>*)

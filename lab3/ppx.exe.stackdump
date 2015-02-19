@@ -1,6 +1,6 @@
-Exception: STATUS_ACCESS_VIOLATION at eip=00404365
-eax=FFFFFFFC ebx=FFE9FF48 ecx=00000000 edx=00000003 esi=80048610 edi=FFE9FF44
-ebp=80048511 esp=0028CBC0 program=C:\Users\Anthony\Documents\GitHub\COMPILERS\keiko\ppx.exe, pid 6972, thread main
+Exception: STATUS_ACCESS_VIOLATION at eip=00402D9D
+eax=FFE9FF2C ebx=FFE9FF18 ecx=80048628 edx=80048540 esi=00000000 edi=FFE9FF20
+ebp=8004853F esp=0028CBC0 program=C:\Users\Anthony\Documents\GitHub\COMPILERS\keiko\ppx.exe, pid 6008, thread main
 cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
 Stack trace:
 Frame     Function  Args

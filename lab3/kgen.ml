@@ -11,20 +11,24 @@ let level = ref 0
 
 let slink = 12
 
-let get_slink d = (!level - d.d_level + 1) * 12
-
-let rec gen_addr_lvl lvl d=
-  if lvl  = d.d_level then
-    CONST d.d_off
-  else
-    SEQ [CONST slink; BINOP Plus; LOADW; gen_addr_lvl (lvl-1) d; ]
+let get_slink d = 
+  let rec get_slink_h lvl d = 
+    if lvl = d.d_level -1 then SEQ []
+    else
+      SEQ [CONST slink; BINOP Plus; LOADW; get_slink_h (lvl-1) d] in
+    SEQ [LOCAL 0; get_slink_h (!level) d;]
 
 (*|gen_addr| -- generate code to push address of a variable *)
 let gen_addr d = 
   if d.d_level = 0 || d.d_off = 0 then
     GLOBAL d.d_lab
   else
-    SEQ [LOCAL  0; gen_addr_lvl (!level) d; BINOP Plus; ]
+    let rec gen_addr_h lvl d=
+      if lvl  = d.d_level then
+        CONST d.d_off
+      else
+        SEQ [CONST slink; BINOP Plus; LOADW; gen_addr_h (lvl-1) d; ] in 
+    SEQ [LOCAL  0; gen_addr_h (!level) d; BINOP Plus; ]
 
 (* |gen_expr| -- generate code for an expression *)
 let rec gen_expr =
@@ -36,8 +40,10 @@ let rec gen_expr =
               VarDef ->
                 SEQ [LINE x.x_line; gen_addr d; LOADW]
             | ProcDef nargs -> 
-                SEQ [LINE x.x_line; gen_addr d; LOADW]
-                (*failwith "no procedure values"*)
+                SEQ [LINE x.x_line; 
+                get_slink d;
+                gen_addr d;
+                PACK]
         end
     | Number x ->
         CONST x
@@ -47,11 +53,13 @@ let rec gen_expr =
         SEQ [gen_expr e1; gen_expr e2; BINOP w]
     | Call (p, args) ->
         let gen_list_expr builtup = function e -> SEQ [builtup; gen_expr e] in
+        let get_instr d =
+          match d.d_kind with 
+              VarDef -> SEQ [gen_addr d; LOADW; UNPACK]
+            | ProcDef nargs ->  SEQ [get_slink d; gen_addr d;] in
             SEQ [LINE p.x_line;
                 List.fold_left gen_list_expr (SEQ[]) (List.rev args); 
-                LOCAL (get_slink (get_def p));
-                (*LOCAL 0;*)
-                gen_addr (get_def p);
+                get_instr (get_def p);
                 PCALLW (List.length args)]
 
 (* |gen_cond| -- generate code for short-circuit condition *)
